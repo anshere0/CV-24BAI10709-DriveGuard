@@ -58,8 +58,8 @@ flowchart TD
     B -->|Upload Video| E[Select File]
     E --> D
     
-    D --> F[Run MediaPipe (Faces)]
-    D --> G[Run YOLO (Objects)]
+    D --> F["Run MediaPipe (Faces)"]
+    D --> G["Run YOLO (Objects)"]
     
     F --> H[Event Engine]
     G --> H
@@ -68,7 +68,7 @@ flowchart TD
     I --> J[Risk Scoring Engine]
     J --> K[Update Session Score]
     
-    K --> L{Session Complete?}
+    K --> L{"Session Complete?"}
     L -->|No| D
     L -->|Yes| M[Save Final Report to DB]
     M --> N[Display Analytics Dashboard]
