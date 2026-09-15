@@ -35,18 +35,18 @@ DriveGuard follows a client-server architecture. The frontend (Vue.js) handles U
 
 ### 7.1 Use Case Diagram
 ```mermaid
-usecaseDiagram
-    actor User
-    User --> (Start Live Monitoring)
-    User --> (Upload Video for Analysis)
-    User --> (View Session History)
-    User --> (View Session Analytics)
-    User --> (Download PDF Report)
+flowchart TD
+    User([User])
+    User --> start[Start Live Monitoring]
+    User --> upload[Upload Video for Analysis]
+    User --> history[View Session History]
+    User --> analytics[View Session Analytics]
+    User --> download[Download PDF Report]
     
-    (Start Live Monitoring) .> (Process Video Frames) : includes
-    (Upload Video for Analysis) .> (Process Video Frames) : includes
-    (Process Video Frames) .> (Calculate Risk Score) : includes
-    (Calculate Risk Score) .> (Save Session to DB) : includes
+    start -.-> process[Process Video Frames]
+    upload -.-> process
+    process -.-> score[Calculate Risk Score]
+    score -.-> save[Save Session to DB]
 ```
 
 ### 7.2 Workflow Diagram
@@ -175,23 +175,23 @@ The project is divided into three main modules:
 *(These are the visual demonstrations of the real-time application in action)*
 
 ### 10.1 Operations Dashboard
-![Dashboard Top](C:/Users/ansha/.gemini/antigravity-ide/brain/74d99a9e-ebff-4b44-857d-e7b340e6d615/.user_uploaded/media_1789482712600.png)
-![Dashboard Triggers and History](C:/Users/ansha/.gemini/antigravity-ide/brain/74d99a9e-ebff-4b44-857d-e7b340e6d615/.user_uploaded/media_1789482723261.png)
+![Dashboard Top](media/report_images/dashboard_top.png)
+![Dashboard Triggers and History](media/report_images/dashboard_history.png)
 
 ### 10.2 Live Camera Monitoring
-![Live Monitor Armed](C:/Users/ansha/.gemini/antigravity-ide/brain/74d99a9e-ebff-4b44-857d-e7b340e6d615/.user_uploaded/media_1789482738488.png)
-![Live Monitor Capturing](C:/Users/ansha/.gemini/antigravity-ide/brain/74d99a9e-ebff-4b44-857d-e7b340e6d615/.user_uploaded/media_1789482761671.png)
-![Backend Job Processing](C:/Users/ansha/.gemini/antigravity-ide/brain/74d99a9e-ebff-4b44-857d-e7b340e6d615/.user_uploaded/media_1789482768335.png)
-![Job Completed](C:/Users/ansha/.gemini/antigravity-ide/brain/74d99a9e-ebff-4b44-857d-e7b340e6d615/.user_uploaded/media_1789483097921.png)
+![Live Monitor Armed](media/report_images/live_monitor_armed.png)
+![Live Monitor Capturing](media/report_images/live_monitor_capturing.png)
+![Backend Job Processing](media/report_images/backend_job_processing.png)
+![Job Completed](media/report_images/job_completed.png)
 
 ### 10.3 Session History
-![Session History View](C:/Users/ansha/.gemini/antigravity-ide/brain/74d99a9e-ebff-4b44-857d-e7b340e6d615/.user_uploaded/media_1789483097999.png)
+![Session History View](media/report_images/session_history.png)
 
 ### 10.4 Analytics & Reporting
-![Analytics View with Event Distribution](C:/Users/ansha/.gemini/antigravity-ide/brain/74d99a9e-ebff-4b44-857d-e7b340e6d615/.user_uploaded/media_1789483098027.png)
+![Analytics View with Event Distribution](media/report_images/analytics_view.png)
 
 ### 10.5 Session Details
-![Detailed Session Review](C:/Users/ansha/.gemini/antigravity-ide/brain/74d99a9e-ebff-4b44-857d-e7b340e6d615/.user_uploaded/media_1789483098054.png)
+![Detailed Session Review](media/report_images/session_details.png)
 
 # 11. Testing Approach
 - **Unit Testing:** `pytest` is used to test the core logic of the `cv_engine`, particularly the `reporting.py` (SessionAggregator) to ensure risk scores and penalties are calculated correctly under various scenarios.
