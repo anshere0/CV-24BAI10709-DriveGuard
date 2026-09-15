@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-label="Bus cockpit demo background">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#122a33" />
+      <stop offset="58%" stop-color="#233f48" />
+      <stop offset="100%" stop-color="#0f1d23" />
+    </linearGradient>
+    <linearGradient id="glass" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#eef5f4" stop-opacity="0.85" />
+      <stop offset="100%" stop-color="#cdd9d8" stop-opacity="0.3" />
+    </linearGradient>
+    <linearGradient id="dash" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#34454a" />
+      <stop offset="100%" stop-color="#18252a" />
+    </linearGradient>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#bg)" />
+  <rect x="0" y="0" width="1600" height="420" fill="#b6d0d0" opacity="0.18" />
+  <rect x="105" y="72" width="1390" height="418" rx="42" fill="url(#glass)" stroke="#ffffff" stroke-opacity="0.18" />
+  <rect x="145" y="108" width="630" height="348" rx="28" fill="#7a9ca0" opacity="0.18" />
+  <rect x="825" y="108" width="560" height="348" rx="28" fill="#7a9ca0" opacity="0.14" />
+  <path d="M0 635 C320 570 515 550 800 552 C1075 555 1290 588 1600 655 L1600 900 L0 900 Z" fill="url(#dash)" />
+  <path d="M124 610 C330 538 534 505 800 505 C1066 505 1270 540 1476 610 L1476 900 L124 900 Z" fill="#24353a" />
+  <path d="M235 676 C398 634 568 610 800 610 C1032 610 1202 634 1365 676 L1365 900 L235 900 Z" fill="#162229" />
+  <circle cx="330" cy="706" r="86" fill="#121c21" stroke="#65797d" stroke-width="8" />
+  <circle cx="330" cy="706" r="54" fill="#2c3e44" />
+  <rect x="560" y="650" width="480" height="132" rx="24" fill="#0d161a" stroke="#5b7074" stroke-opacity="0.35" />
+  <rect x="590" y="677" width="136" height="76" rx="14" fill="#183743" />
+  <rect x="744" y="677" width="118" height="76" rx="14" fill="#4a2c1e" />
+  <rect x="880" y="677" width="130" height="76" rx="14" fill="#1e3a31" />
+  <rect x="1120" y="632" width="218" height="168" rx="20" fill="#10171a" stroke="#6c8084" stroke-opacity="0.3" />
+  <rect x="1148" y="666" width="162" height="28" rx="14" fill="#15313d" />
+  <rect x="1148" y="708" width="118" height="22" rx="11" fill="#35464a" />
+  <rect x="1148" y="742" width="146" height="22" rx="11" fill="#35464a" />
+  <circle cx="1304" cy="707" r="18" fill="#d46a2e" opacity="0.82" />
+  <path d="M760 540 L840 540 L812 612 L788 612 Z" fill="#5e7176" opacity="0.45" />
+  <path d="M100 488 L1500 488" stroke="#ffffff" stroke-opacity="0.14" stroke-width="2" />
+</svg>

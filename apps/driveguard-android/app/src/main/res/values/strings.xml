@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">DriveGuard-android</string>
+    <string name="backend_url_label">Backend base URL</string>
+</resources>

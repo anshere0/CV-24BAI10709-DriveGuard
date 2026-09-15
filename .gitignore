@@ -1,0 +1,43 @@
+plan.md
+research.md
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.venv/
+venv/
+env/
+ENV/
+*.db
+*.sqlite3
+
+# Web / Node
+frontend/node_modules/
+frontend/dist/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Config and Secrets
+.env
+*.env
+config.yaml
+
+# Local app data
+backend_uploads/
+backend_artifacts/
+outputs/
+driveguard_ai.db
+
+# IDE / editor
+.vscode/PythonImportHelper-v2-Completion.json
+.idea/
+.DS_Store
