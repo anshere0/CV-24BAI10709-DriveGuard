@@ -2,9 +2,9 @@ from __future__ import annotations
 
 import unittest
 
-from driver_monitoring.event_engine import EventEngine
-from driver_monitoring.face_monitor import FaceState
-from driver_monitoring.tracker import TrackedObject
+from cv_engine.event_engine import EventEngine
+from cv_engine.face_monitor import FaceState
+from cv_engine.tracker import TrackedObject
 
 
 def make_track(
@@ -25,7 +25,7 @@ def make_track(
 
 class EventEngineTests(unittest.TestCase):
     def test_phone_use_requires_driver_association_and_threshold(self) -> None:
-        engine = EventEngine(available_labels=["person", "cell phone"])
+        engine = EventEngine()
         face_state = FaceState(driver_present=True, face_bbox=(100, 100, 180, 180))
         tracked_objects = [
             make_track(1, "person", (60, 60, 260, 320), 4.0),
@@ -35,39 +35,26 @@ class EventEngineTests(unittest.TestCase):
         events_initial = engine.evaluate(tracked_objects, face_state, 0.0)
         events_after = engine.evaluate(tracked_objects, face_state, 2.1)
 
+        # Phone near face is instantaneous
         self.assertIn("PHONE_NEAR_FACE", [event.event_type for event in events_initial])
+        # Phone use requires 2s consecutive by default
         self.assertIn("PHONE_USE", [event.event_type for event in events_after])
 
-    def test_incorrect_seatbelt_is_distinct_from_missing(self) -> None:
-        engine = EventEngine(available_labels=["seatbelt_present", "seatbelt_incorrect", "seatbelt_missing"])
-        face_state = FaceState(driver_present=True, face_bbox=(100, 100, 180, 180))
-        tracked_objects = [
-            make_track(1, "person", (60, 60, 260, 320), 4.0),
-            make_track(2, "seatbelt_incorrect", (120, 200, 200, 280), 2.5),
-        ]
+    def test_drowsiness_detected(self) -> None:
+        engine = EventEngine()
+        face_state_drowsy = FaceState(driver_present=True, face_bbox=(100, 100, 180, 180), eyes_closed=True, eyes_closed_duration_seconds=2.0)
+        tracked_objects: list[TrackedObject] = []
+        
+        events = engine.evaluate(tracked_objects, face_state_drowsy, 2.0)
+        self.assertIn("DROWSINESS", [event.event_type for event in events])
 
-        events = engine.evaluate(tracked_objects, face_state, 2.5)
-
-        self.assertIn("SEATBELT_INCORRECT", [event.event_type for event in events])
-        self.assertNotIn("NO_SEATBELT", [event.event_type for event in events])
-
-    def test_no_seatbelt_requires_threshold(self) -> None:
-        engine = EventEngine(available_labels=["seatbelt_present", "seatbelt_missing"])
-        face_state = FaceState(driver_present=True, face_bbox=(100, 100, 180, 180))
-        tracked_short = [
-            make_track(1, "person", (60, 60, 260, 320), 4.0),
-            make_track(2, "seatbelt_missing", (120, 200, 200, 280), 2.0),
-        ]
-        tracked_long = [
-            make_track(1, "person", (60, 60, 260, 320), 4.0),
-            make_track(2, "seatbelt_missing", (120, 200, 200, 280), 3.2),
-        ]
-
-        events_short = engine.evaluate(tracked_short, face_state, 0.0)
-        events_long = engine.evaluate(tracked_long, face_state, 0.0)
-
-        self.assertNotIn("NO_SEATBELT", [event.event_type for event in events_short])
-        self.assertIn("NO_SEATBELT", [event.event_type for event in events_long])
+    def test_distraction_detected(self) -> None:
+        engine = EventEngine()
+        face_state_distracted = FaceState(driver_present=True, face_bbox=(100, 100, 180, 180), looking_off_road=True, off_road_duration_seconds=2.5)
+        tracked_objects: list[TrackedObject] = []
+        
+        events = engine.evaluate(tracked_objects, face_state_distracted, 2.5)
+        self.assertIn("DISTRACTION", [event.event_type for event in events])
 
 
 if __name__ == "__main__":
